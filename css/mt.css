@@ -1,0 +1,60 @@
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(238, 204, 183);
+    border-radius: 5px;
+    box-shadow: inset 1px 1px 4px #999999;
+    margin-top: 20px;
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    padding-top: 10px;
+}
+
+h2 {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+td {
+    padding: 10px;
+    vertical-align: top;
+}
+
+td:first-child {
+    width: 96px;
+    padding-left: 20px;
+}
+
+tr:hover {
+    font-weight: bold;
+    color: rgb(86, 56, 34);
+}
+
+tr {
+    transition: 0.7s;
+}
+
+#evaluate {
+    margin: 20px;
+}
+
+#reset {
+    margin: 20px;
+}
+
+#rp {
+    text-align: center
+}

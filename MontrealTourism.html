@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Montreal Tourism</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/mt.css" />
+    <script type="module" src="Exemple_MT.js"></script>
+    <script>
+        function validate_user() {
+            var sn = document.forms["form1"]["fam_name"].value;
+            if (sn == "") {
+                alert("Family name must be filled out");
+                return false;
+            } else {
+                if (!(/^[ ]*[A-Z]([a-z]|(([ ]+|-)[A-Z]))*[ ]*$/.test(sn))) {
+                    alert("Invalid family name");
+                    return false;
+                } else {
+                    document.forms["form1"]["fam_name"].value = sn.replace(/[ ][ ]+/g, ' ').replace(/(^[ ])|([ ]$)/g, ''); // remove repeated blanks 
+
+                    var gn = document.forms["form1"]["giv_name"].value;
+                    if (gn == "") {
+                        alert("Given name must be filled out");
+                        return false;
+                    } else {
+                        if (!(/^[ ]*[A-Z]([a-z]|(([ ]+|-)[A-Z]))*[ ]*$/.test(gn))) {
+                            alert("Invalid Given name");
+                            return false;
+                        } else {
+                            document.forms["form1"]["giv_name"].value = gn.replace(/[ ][ ]+/g, ' ').replace(/(^[ ])|([ ]$)/g, ''); // remove repeated blanks 
+                            var s = document.forms["form1"]["sex"];
+                            if ((!s[0].checked) && (!s[1].checked)) {
+                                alert("Birth sex must be informed");
+                                return false;
+                            } else {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        function add_Hotel_type(id_ht, desc_ht) {
+            document.getElementById("hotel").innerHTML += "<option value=" + id_ht + ">" + desc_ht + "</option>";
+
+        }
+
+        function add_Room_type(id_rt, desc_rt) {
+            document.getElementById("room").innerHTML += "<option value=" + id_rt + ">" + desc_rt + "</option>";
+        }
+
+        function add_Activity(id_act, desc_act, price) {
+            document.getElementById("activities").innerHTML += "<input id=c" + id_act + " type='checkbox' name=c_" + id_act + " />" +
+                "<label for=c" + id_act + "> " + desc_act + " Can$ " + price + "</label> <br />";
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Montreal -Tourism</h1>
+        <h2>A trip evaluator for a visit</h2>
+        <form name="form1" onsubmit="return validate_user()" action="mtData" method="post">
+            <!-- por causa desse mtdata que sabemos que ele vai ativar o submit do botao -->
+            <table>
+                <tr>
+                    <td>Family name:</td>
+                    <td>
+                        <input id="visitorsn" type="text" name="fam_name" size="30" maxlength="50" placeholder="your family name">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Given name:</td>
+                    <td>
+                        <input id="visitorgn" type="text" name="giv_name" size="30" maxlength="50" placeholder="your given name">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Sex:</td>
+                    <td>
+                        <input id="male" type="radio" name="sex" value="male" />
+                        <label for="male">Male</label>
+                        <br />
+                        <input id="female" type="radio" name="sex" value="female" />
+                        <label for="female">Female</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Number:</td>
+                    <td>
+                        <select name="num_perso">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select> persons
+                    </td>
+                </tr>
+                <tr>
+                    <td>Duration:</td>
+                    <td>
+                        <select name="num_days">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                        </select> days
+                    </td>
+                </tr>
+                <tr>
+                    <td>Hotel:</td>
+                    <td>
+                        <select id="hotel" name="hotel_type">
+                          <!-- <option value="s_1">1 star</option>
+                            <option value="s_2">2 stars</option>
+                            <option value="s_3" selected>3 stars</option>
+                            <option value="s_4">4 stars</option>
+                            <option value="s_5">5 stars </option> -->
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Room Type:</td>
+                    <td>
+                        <select id="room" name="room_type" size="3">
+                            <!-- <option value="single-room">Single room</option>
+                            <option value="semi-suite" selected>Semi-suite</option>
+                            <option value="suite">Suite</option>
+                            <option value="double-suite">Double suite</option> -->
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Activities:</td>
+                    <td id="activities">
+                        <!--  <input id="cbt" type="checkbox" name="c_bus_tour" />
+                        <label for="cbt">City-bus-tours Can$ 20</label>
+                        <br />
+                        <input id="cspa" type="checkbox" name="c_spa" />
+                        <label for="cspa">Spa-Manage Can$ 100 </label>
+                        <br />
+                        <input id="csport" type="checkbox" name="c_sport" />
+                        <label for="csport">Sport Event Can$ 150 </label>
+                        <br />
+                        <input id="cbike" type="checkbox" name="c_sport" />
+                        <label for="cbike">Bike Can$ 50 </label>
+                        <br />-->
+                    </td>
+                </tr>
+            </table>
+            <input id="evaluate" type="submit" name="b_submit" value="Submit" />
+            <input id="reset" type="reset" name="b_reset" value="Reset" />
+            <p id="rp"></p>
+        </form>
+    </div>
+</body>
+
+</html>
